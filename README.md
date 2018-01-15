@@ -1,2 +1,1 @@
-# the-best-alert-system
-a React app made in Glitch to send and test apocalypse alerts, with excellent user interface. 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
