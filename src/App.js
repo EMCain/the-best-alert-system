@@ -10,6 +10,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="github-link">
+          <a className="corner-link" href="https://github.com/EMCain/the-best-alert-system" target="blank">WTF is this??</a>
+        </div>
         <div className="App-header">
           <WarningIcon classes="large"/>
           <h2>
