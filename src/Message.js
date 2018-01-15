@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import generateMessage from './middleware/messages.js';
-
 
 export class WarningIcon extends Component {
   render () {
@@ -23,7 +21,7 @@ class Message extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      'text': generateMessage(),
+      'text': props.text,
     };
   }
   

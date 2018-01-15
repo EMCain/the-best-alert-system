@@ -2,11 +2,28 @@ import React, { Component } from 'react';
 
 import { Message, WarningIcon } from './Message.js';
 import IsItADrill from './Form.js';
+
+import generateMessage from './middleware/messages.js';
+
 import './App.css';
 
 
 
 class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      baseMessage: generateMessage()
+    };
+  }
+  
+  submitForm (event) {
+    event.preventDefault();
+    const form = event.target;
+    alert("sending message...");
+  }
+  
+  
   render() {
     return (
       <div className="App">
@@ -19,8 +36,8 @@ class App extends Component {
             Apocalypse Alert System
           </h2>
         </div>
-      <Message/>
-      <IsItADrill drill={false}/>
+      <Message text={this.state.baseMessage}/>
+      <IsItADrill drill={false} onSubmit={this.submitForm}/>
       </div>
     );
   }

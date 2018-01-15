@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const IsItADrill = props => {
   return (
-      <form>
+      <form onSubmit={props.onSubmit}>
         <label>
           <input 
             type="radio" 
@@ -11,7 +11,7 @@ const IsItADrill = props => {
           />
           THIS IS NOT A DRILL
         </label>
-        <button className="huge">Send Alert</button>
+        <button className="huge" type="submit">Send Alert</button>
         <a href="#">test alert system</a>
     
       </form>
