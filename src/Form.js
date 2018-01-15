@@ -8,6 +8,7 @@ const IsItADrill = props => {
             type="radio" 
             name="not_a_drill" 
             checked={!props.drill}
+            value="true"
           />
           THIS IS NOT A DRILL
         </label>

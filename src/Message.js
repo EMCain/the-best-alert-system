@@ -18,23 +18,35 @@ export class WarningIcon extends Component {
 }
 
 class Message extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      'text': props.text,
-    };
-  }
-  
-  render () {
-    const text = this.state.text;
+  render () {    
+    let alertHeader;
+    let showCancel = false;
+    console.log(this.props);
+    
+    if (!this.props.countdownStarted) {
+      alertHeader = 'ALERT!!!';
+    } else if (this.props.countdown > 0) {
+      alertHeader = `Sending message in ${this.props.countdown}...`;
+      showCancel = true;
+    } else {
+      alertHeader = 'Message sent!';
+    }
+
     return (
         <div>
           <h1>
             <WarningIcon classes="small"/>
-            ALERT!!!
+            {alertHeader}
+
             <WarningIcon classes="small"/>
           </h1>
-          <h2>{ text }</h2>
+            { showCancel && 
+              <a href="#" onClick={this.props.onCancel}>cancel</a>
+            }
+          <h2>
+            { this.props.text } 
+            { this.props.notADrill && ' THIS IS NOT A DRILL'}
+          </h2>
         </div>
     );
   }
