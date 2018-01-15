@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
+import generateMessage from './middleware/messages.js';
 
-// convenience method to get a random array member
-function getRandom(arr) {
-    const index = Math.floor(Math.random() * arr.length);
-    return arr[index];
-}
 
 export class WarningIcon extends Component {
   render () {
@@ -26,14 +22,8 @@ export class WarningIcon extends Component {
 class Message extends Component {
   constructor (props) {
     super(props);
-    
-    const victim = getRandom(['Earth', 'The Government', 'Humanity']);
-    const verb = getRandom(['Invaded', 'Destroyed', 'Infected', 'Crushed', 'Wiped Out']);
-    const adjective = getRandom(['Giant', 'Mutant', 'Radioactive', 'Undead', 'Demonic']);
-    const monster = getRandom(['Aliens', 'Werewolves', 'Spiders', 'Mansplainers']);
-        
     this.state = {
-      'text': `${victim} has been ${verb} by ${adjective} ${monster}!!!`,
+      'text': generateMessage(),
     };
   }
   
