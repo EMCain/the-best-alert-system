@@ -3,3 +3,22 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+/* TODO convert this to Sass at some point */
+.warning-icon.large img {
+  width: 4rem;
+}
+
+.warning-icon.small img {
+  width: 2rem;
+}
+
+button.huge {
+  width: 90%;
+  margin: 10px 5%;
+  display: block;
+  font-size: 50px;
+  background-color: #dd0000;
+  color: white;
+  padding: 5px;
+}
