@@ -12,7 +12,7 @@ const IsItADrill = props => {
           THIS IS NOT A DRILL
         </label>
         <button className="huge">Send Alert</button>
-        <a href="#">actually don't</a>
+        <a href="#">test alert system</a>
     
       </form>
   );
