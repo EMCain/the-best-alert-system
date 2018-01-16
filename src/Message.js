@@ -20,9 +20,7 @@ export class WarningIcon extends Component {
 class Message extends Component {
   render () {    
     let alertHeader;
-    let showCancel = false;
-    console.log(this.props);
-    
+    let showCancel = false;    
     if (!this.props.countdownStarted) {
       alertHeader = 'ALERT!!!';
     } else if (this.props.countdown > 0) {

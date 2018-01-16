@@ -9,10 +9,10 @@ import './App.css';
 
 class App extends Component {
   constructor (props) {
-    super(props);
+    super(props);    
     this.state = {
       baseMessage: generateMessage(),
-      notADrill: false,
+      notADrill: true,
       countdown: 10,
       countdownStarted: false
     };
@@ -20,14 +20,16 @@ class App extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
     this.cancelMessage = this.cancelMessage.bind(this);
+    this.testMode = this.testMode.bind(this);
+    this.onRadioChange = this.onRadioChange.bind(this);
   }
   
   submitForm (event) {
     event.preventDefault();
     const form = event.target;
+
     this.setState(
       {
-        'notADrill': form.not_a_drill.value === 'true', 
         'countdown': 10, 
         'countdownStarted': true
       }
@@ -35,6 +37,7 @@ class App extends Component {
     this.startTimer();
   }
   
+  // attach this as a listener to the link that shows up during the countdown
   cancelMessage (event) {
     event.preventDefault();
     if (confirm("are you sure you want to cancel this alert?")) {
@@ -43,23 +46,18 @@ class App extends Component {
       this.setState({
         countdown: 10,
         countdownStarted: false,
-        notADrill: false
       });
-    } else {
-      this.setState({
-        notADrill: true
-      });
-    }
+    } 
   }
   
+  // timer inspired by https://stackoverflow.com/a/40887181
   componentDidMount() {
     let timeLeftVar = this.state.countdown;
     this.setState({'countdown': timeLeftVar});
-      
   }
   
   startTimer() {
-    if (this.timer == 0) {
+    if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
       this.setState({countdownStarted: true});
     }
@@ -74,11 +72,29 @@ class App extends Component {
     });
     
     // Check if we're at zero.
-    if (seconds == 0) { 
+    if (seconds === 0) { 
       clearInterval(this.timer);
     }
   }
 
+  // attach this as a listener to the "test" link after the button
+  testMode(event)  {
+    if (confirm("this will send the message out as a test. Are you sure?")) {
+      event.preventDefault();
+      this.setState({
+        notADrill: false
+      });
+      document.querySelector('input[type=radio]').checked = false;
+    }
+  }
+  
+  onRadioChange (event) {
+    const form = event.target;
+    this.setState(
+      {
+        'notADrill': form.not_a_drill.value === 'true', 
+    });
+  }
   
   
   render() {
@@ -99,8 +115,9 @@ class App extends Component {
         countdownStarted={this.state.countdownStarted}
         countdown={this.state.countdown}
         onCancel={this.cancelMessage}
+        onTestMode={this.testMode}
       />
-      <IsItADrill drill={false} onSubmit={this.submitForm.bind(this)}/>
+      <IsItADrill onRadioChange={this.onRadioChange} notADrill={typeof(this.state.notADrill) === 'undefined' || this.state.notADrill} onTestMode={this.testMode.bind(this)} onSubmit={this.submitForm.bind(this)}/>
       </div>
     );
   }
